@@ -29,7 +29,7 @@
     <artifactId>dd-validate-bagpack-cli</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
-    <name>Dd Validate Bagpack Cli</name>
+    <name>DD Validate BagPack CLI</name>
     <url>https://github.com/DANS-KNAW/dd-validate-bagpack-cli</url>
     <description>Command-line client for validating BagPacks</description>
     <inceptionYear>2025</inceptionYear>
@@ -38,6 +38,7 @@
         <main-class>nl.knaw.dans.validatebagpackcli.DdValidateBagpackCli</main-class>
         <picocli.version>4.7.5</picocli.version> <!-- TODO: move to parent -->
         <command-name>bagpack-validate</command-name>
+        <dd-validate-bagpack-api.version>0.1.0-SNAPSHOT</dd-validate-bagpack-api.version>
     </properties>
 
     <scm>
@@ -79,8 +80,6 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        <!-- Only required if this CLI connects to a OpenAPI generated service -->
-        <!--
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
@@ -106,7 +105,6 @@
             <artifactId>activation</artifactId>
             <version>1.1.1</version>
         </dependency>
-        -->
     </dependencies>
 
     <repositories>
@@ -172,6 +170,53 @@
                 <groupId>nl.knaw.dans</groupId>
                 <artifactId>dans-nexus-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>nl.knaw.dans</groupId>
+                                    <artifactId>dd-validate-bagpack-api</artifactId>
+                                    <version>${dd-validate-bagpack-api.version}</version>
+                                    <outputDirectory>${project.build.directory}/openapi</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-dd-validate-bagpack-api</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.build.directory}/openapi/dd-validate-bagpack-api.yml</inputSpec>
+                            <generatorName>java</generatorName>
+                            <configOptions>
+                                <apiPackage>nl.knaw.dans.validatebagpackcli.client</apiPackage>
+                                <modelPackage>nl.knaw.dans.validatebagpackcli.api</modelPackage>
+                                <invokerPackage>nl.knaw.dans.validatebagpackcli.client</invokerPackage>
+                                <annotationLibrary>none</annotationLibrary>
+                                <library>jersey2</library>
+                                <openApiNullable>false</openApiNullable>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
