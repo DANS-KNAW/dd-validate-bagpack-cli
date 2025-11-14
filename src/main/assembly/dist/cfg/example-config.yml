@@ -1,3 +1,13 @@
+validateBagpack:
+  url: http://localhost:20375
+  httpClient:
+    timeout: 30s
+    connectionTimeout: 15s
+    connectionRequestTimeout: 15s
+    timeToLive: 1h
+    retries: 2
+    userAgent: dd-validate-bagpack-cli
+
 #
 # See https://www.dropwizard.io/en/latest/manual/configuration.html#logging
 #
