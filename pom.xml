@@ -26,7 +26,7 @@
     </parent>
 
     <artifactId>dd-validate-bagpack-cli</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.2.0</version>
 
     <name>DD Validate BagPack CLI</name>
     <url>https://github.com/DANS-KNAW/dd-validate-bagpack-cli</url>
@@ -42,7 +42,7 @@
 
     <scm>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dd-validate-bagpack-cli</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v0.2.0</tag>
     </scm>
 
     <dependencies>
