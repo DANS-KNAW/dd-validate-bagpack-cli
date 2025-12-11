@@ -35,7 +35,6 @@
 
     <properties>
         <main-class>nl.knaw.dans.validatebagpackcli.DdValidateBagpackCli</main-class>
-        <picocli.version>4.7.5</picocli.version> <!-- TODO: move to parent -->
         <command-name>bagpack-validate</command-name>
         <dd-validate-bagpack-api.version>0.2.0</dd-validate-bagpack-api.version>
     </properties>
