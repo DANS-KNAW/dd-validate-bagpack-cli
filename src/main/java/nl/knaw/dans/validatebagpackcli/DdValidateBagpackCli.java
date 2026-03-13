@@ -75,9 +75,10 @@ public class DdValidateBagpackCli extends AbstractCommandLineApp<DdValidateBagpa
 
     @Override
     public Integer call() {
-        var command = new ValidateCommandDto()
-            .bagLocation(bagPath.toPath().toString());
         try {
+            var command = new ValidateCommandDto()
+                .bagLocation(bagPath.toPath().toRealPath().toString());
+
             // Submit validation request
             var submitResponse = api.validateBagPackWithHttpInfo(command);
             
