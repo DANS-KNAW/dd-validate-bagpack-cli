@@ -30,7 +30,7 @@
 
     <name>DD Validate BagPack CLI</name>
     <description>Command-line client for validating BagPacks</description>
-    <url>https://github.com/DANS-KNAW/dd-validate-bagpack-cli</url>
+    <url>https://dans-knaw.github.io/dd-validate-bagpack-cli</url>
     <inceptionYear>2025</inceptionYear>
 
     <scm>
