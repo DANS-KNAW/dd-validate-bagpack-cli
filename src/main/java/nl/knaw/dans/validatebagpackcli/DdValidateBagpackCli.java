@@ -65,10 +65,10 @@ public class DdValidateBagpackCli extends AbstractCommandLineApp<DdValidateBagpa
     @Override
     public void configureCommandLine(CommandLine commandLine, DdValidateBagpackCliConfig config) {
         api = new ClientProxyBuilder<ApiClient, DefaultApi>()
-            .apiClient(new ApiClient())
+            .apiClientCtor(ApiClient::new)
             .basePath(config.getValidateBagpack().getUrl())
             .httpClient(config.getValidateBagpack().getHttpClient())
-            .defaultApiCtor(DefaultApi::new)
+            .proxyCtor(DefaultApi::new)
             .build();
         log.debug("Configuring command line");
     }
